@@ -22,6 +22,8 @@
       "@/home/*": ["./src/features/public/home/*"],
       "@/auth/*": ["./src/features/auth/*"],
       "@/automation/*": ["./src/features/automation/*"],
+      "@/flows/*": ["./src/features/automation/flows/*"],
+      "@/templates/*": ["./src/features/automation/flow-templates/*"],
       "@/features/*": ["./src/features/*"],
       "@/components/*": ["./src/shared/components/*"],
       "@/hooks/*": ["./src/shared/hooks/*"],
