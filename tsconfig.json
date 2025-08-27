@@ -19,6 +19,7 @@
       }
     ],
     "paths": {
+      "@/home/*": ["./src/features/public/home/*"],
       "@/features/*": ["./src/features/*"],
       "@/components/*": ["./src/shared/components/*"],
       "@/hooks/*": ["./src/shared/hooks/*"],
