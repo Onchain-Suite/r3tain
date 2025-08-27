@@ -29,6 +29,7 @@
       "@/flows/*": ["./src/features/automation/flows/*"],
       "@/home/*": ["./src/features/public/home/*"],
       "@/onboarding/*": ["./src/features/onboarding-flow/*"],
+      "@/profile/*": ["./src/features/profile/*"],
       "@/templates/*": ["./src/features/automation/flow-templates/*"],
       "@/segment/*": ["./src/features/segment/*"],
       "@/seo/*": ["./src/features/seo/*"],
