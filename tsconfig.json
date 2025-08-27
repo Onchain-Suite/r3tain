@@ -20,6 +20,7 @@
     ],
     "paths": {
       "@/home/*": ["./src/features/public/home/*"],
+      "@/auth/*": ["./src/features/auth/*"],
       "@/features/*": ["./src/features/*"],
       "@/components/*": ["./src/shared/components/*"],
       "@/hooks/*": ["./src/shared/hooks/*"],

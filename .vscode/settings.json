@@ -66,16 +66,14 @@
   },
 
   // TypeScript settings
-  "typescript.preferences.importModuleSpecifier": "relative",
-  "typescript.preferences.useAliasesForRenames": false,
-  "typescript.suggest.autoImports": true,
-  "typescript.updateImportsOnFileMove.enabled": "always",
+  // "typescript.suggest.autoImports": true,
+  // "typescript.updateImportsOnFileMove.enabled": "always",
 
   // Files settings
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
-  "files.eol": "\\n",
+  "files.eol": "\n",
   "files.associations": {
     "*.css": "tailwindcss",
     "*.mdx": "markdown"

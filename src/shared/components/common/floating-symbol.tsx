@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { v4 as uuidv4 } from "uuid";
 
-import { useParticles } from "@/hooks/ui";
+import { useParticles } from "@/hooks/client";
 
 export const FloatingSymbol = ({
   children,

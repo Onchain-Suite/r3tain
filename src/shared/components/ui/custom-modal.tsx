@@ -5,7 +5,7 @@ import type React from "react";
 import { useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
-import { useIsMobile } from "@/hooks/ui/use-mobile";
+import { useIsMobile } from "@/hooks/client/use-mobile";
 
 interface CustomModalProps {
   isOpen: boolean;

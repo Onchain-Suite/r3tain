@@ -3,8 +3,8 @@ import "@/styles/globals.css";
 import type { Metadata, Viewport } from "next";
 import { Inter, Manrope } from "next/font/google";
 
-import { RootProviders } from "@/lib/providers";
 import { seoConfig } from "@/lib/seo-config";
+import { RootProviders } from "@/shared/providers";
 
 const inter = Inter({
   variable: "--font-inter",
