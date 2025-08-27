@@ -15,7 +15,8 @@
     "commit": "cz",
     "prepare": "husky",
     "pre-commit": "lint-staged",
-    "validate": "npm run type-check && npm run lint && npm run prettier"
+    "pre-push": "bun run lint && bun run build",
+    "validate": "bun run type-check && bun run lint && bun run prettier"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
