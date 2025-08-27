@@ -1,0 +1,41 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+
+import {
+  ActionCards,
+  AdditionalResources,
+  FeatureCards,
+  HeroSection,
+  PageTitle,
+} from "@/community/components/dashboard";
+import { dashboardRoutes } from "@/config/routes";
+
+export const NewUserDashboardPage = () => {
+  const { push } = useRouter();
+  return (
+    <main className="min-w-0 flex-1">
+      <PageTitle />
+
+      <div className="space-y-6 pb-8 lg:space-y-8">
+        <div className="pt-6 lg:pt-8">
+          <HeroSection
+            onGetStarted={() => push(dashboardRoutes.addSubscribers)}
+          />
+        </div>
+
+        <div className="px-4 lg:px-8">
+          <FeatureCards />
+        </div>
+
+        <div className="px-0 lg:px-8">
+          <ActionCards />
+        </div>
+
+        <div className="px-4 lg:px-8">
+          <AdditionalResources />
+        </div>
+      </div>
+    </main>
+  );
+};
