@@ -22,6 +22,7 @@
       "@/analytics/*": ["./src/features/analytics/*"],
       "@/automation/*": ["./src/features/automation/*"],
       "@/auth/*": ["./src/features/auth/*"],
+      "@/campaign/*": ["./src/features/campaign/*"],
       "@/dashboard/*": ["./src/features/dashboard/*"],
       "@/features/*": ["./src/features/*"],
       "@/flows/*": ["./src/features/automation/flows/*"],
