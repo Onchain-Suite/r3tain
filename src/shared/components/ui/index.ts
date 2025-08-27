@@ -12,6 +12,7 @@ export * from "./checkbox";
 export * from "./collapsible";
 export * from "./command";
 export * from "./custom-modal";
+export * from "./custom-tabs";
 export * from "./date-picker";
 export * from "./dialog";
 export * from "./drawer";
