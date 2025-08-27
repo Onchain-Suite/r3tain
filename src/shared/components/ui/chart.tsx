@@ -2,8 +2,21 @@
 
 import * as React from "react";
 import * as RechartsPrimitive from "recharts";
+import {
+  type NameType,
+  type Payload,
+  type ValueType,
+} from "recharts/types/component/DefaultTooltipContent";
 
 import { cn } from "@/lib/utils";
+
+// Define specific types for your chart data
+export type ChartValueType = ValueType; // number | string | Array<number | string>
+export type ChartNameType = NameType; // number | string
+export type ChartPayload<
+  TValue extends ChartValueType = ChartValueType,
+  TName extends ChartNameType = ChartNameType,
+> = Payload<TValue, TName>;
 
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: "", dark: ".dark" } as const;
@@ -105,7 +118,25 @@ ${colorConfig
 
 const ChartTooltip = RechartsPrimitive.Tooltip;
 
-function ChartTooltipContent({
+interface ChartTooltipContentProps<
+  TValue extends ChartValueType = ChartValueType,
+  TName extends ChartNameType = ChartNameType,
+> extends React.ComponentProps<typeof RechartsPrimitive.Tooltip>,
+    Omit<React.ComponentProps<"div">, "content"> {
+  hideLabel?: boolean;
+  hideIndicator?: boolean;
+  indicator?: "line" | "dot" | "dashed";
+  nameKey?: string;
+  labelKey?: string;
+  active?: boolean;
+  payload?: ChartPayload<TValue, TName>[];
+  label?: string;
+}
+
+function ChartTooltipContent<
+  TValue extends ChartValueType = ChartValueType,
+  TName extends ChartNameType = ChartNameType,
+>({
   active,
   payload,
   className,
@@ -119,14 +150,7 @@ function ChartTooltipContent({
   color,
   nameKey,
   labelKey,
-}: React.ComponentProps<typeof RechartsPrimitive.Tooltip> &
-  React.ComponentProps<"div"> & {
-    hideLabel?: boolean;
-    hideIndicator?: boolean;
-    indicator?: "line" | "dot" | "dashed";
-    nameKey?: string;
-    labelKey?: string;
-  }) {
+}: ChartTooltipContentProps<TValue, TName>) {
   const { config } = useChart();
 
   const tooltipLabel = React.useMemo(() => {
@@ -135,11 +159,11 @@ function ChartTooltipContent({
     }
 
     const [item] = payload;
-    const key = `${labelKey ?? item.dataKey ?? item.name ?? "value"}`;
+    const key = `${labelKey ?? item?.dataKey ?? item?.name ?? "value"}`;
     const itemConfig = getPayloadConfigFromPayload(config, item, key);
     const value =
       !labelKey && typeof label === "string"
-        ? (config[label as keyof typeof config].label ?? label)
+        ? (config[label as keyof typeof config]?.label ?? label)
         : itemConfig?.label;
 
     if (labelFormatter) {
@@ -187,13 +211,13 @@ function ChartTooltipContent({
 
           return (
             <div
-              key={item.dataKey}
+              key={generateChartItemKey(item, index)}
               className={cn(
                 "[&>svg]:text-muted-foreground flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5",
                 indicator === "dot" && "items-center"
               )}
             >
-              {formatter && item.value !== undefined && item.name ? (
+              {formatter && item?.value !== undefined && item.name ? (
                 formatter(item.value, item.name, item, index, item.payload)
               ) : (
                 <>
@@ -251,17 +275,26 @@ function ChartTooltipContent({
 
 const ChartLegend = RechartsPrimitive.Legend;
 
-function ChartLegendContent({
+interface ChartLegendContentProps<
+  TValue extends ChartValueType = ChartValueType,
+  TName extends ChartNameType = ChartNameType,
+> extends React.ComponentProps<"div"> {
+  verticalAlign?: RechartsPrimitive.LegendProps["verticalAlign"];
+  hideIcon?: boolean;
+  nameKey?: string;
+  payload?: ChartPayload<TValue, TName>[];
+}
+
+function ChartLegendContent<
+  TValue extends ChartValueType = ChartValueType,
+  TName extends ChartNameType = ChartNameType,
+>({
   className,
   hideIcon = false,
   payload,
   verticalAlign = "bottom",
   nameKey,
-}: React.ComponentProps<"div"> &
-  Pick<RechartsPrimitive.LegendProps, "payload" | "verticalAlign"> & {
-    hideIcon?: boolean;
-    nameKey?: string;
-  }) {
+}: ChartLegendContentProps<TValue, TName>) {
   const { config } = useChart();
 
   if (!payload?.length) {
@@ -276,13 +309,13 @@ function ChartLegendContent({
         className
       )}
     >
-      {payload.map((item) => {
+      {payload.map((item, index) => {
         const key = `${nameKey ?? item.dataKey ?? "value"}`;
         const itemConfig = getPayloadConfigFromPayload(config, item, key);
 
         return (
           <div
-            key={item.value}
+            key={generateChartItemKey(item, index)}
             className={cn(
               "[&>svg]:text-muted-foreground flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3"
             )}
@@ -305,12 +338,32 @@ function ChartLegendContent({
   );
 }
 
+// Helper to generate a stable key for chart items
+function generateChartItemKey<
+  TValue extends ChartValueType,
+  TName extends ChartNameType,
+>(item: ChartPayload<TValue, TName>, index: number): string {
+  const keyParts = [
+    typeof item.dataKey === "string" ? item.dataKey : null,
+    typeof item.name === "string" ? item.name : null,
+    item.color,
+    typeof item.value === "object"
+      ? JSON.stringify(item.value)
+      : String(item.value),
+  ]
+    .filter(Boolean)
+    .join("-");
+
+  return (
+    keyParts ?? `chart-item-${index}-${Math.random().toString(36).substr(2, 9)}`
+  );
+}
+
 // Helper to extract item config from a payload.
-function getPayloadConfigFromPayload(
-  config: ChartConfig,
-  payload: unknown,
-  key: string
-) {
+function getPayloadConfigFromPayload<
+  TValue extends ChartValueType,
+  TName extends ChartNameType,
+>(config: ChartConfig, payload: ChartPayload<TValue, TName>, key: string) {
   if (typeof payload !== "object" || payload === null) {
     return undefined;
   }
@@ -343,6 +396,15 @@ function getPayloadConfigFromPayload(
     ? config[configLabelKey]
     : config[key as keyof typeof config];
 }
+
+// Example usage types for specific chart data
+export type SalesChartData = {
+  month: string;
+  sales: number;
+  profit: number;
+};
+
+export type SalesChartPayload = ChartPayload<number, string>;
 
 export {
   ChartContainer,
