@@ -7,8 +7,6 @@ import {
 } from "@stackframe/stack";
 import { useEffect, useState } from "react";
 
-import { getUserOnboardingCompletionTime } from "@/lib/onboarding";
-
 interface UseAuthReturn {
   user: CurrentUser | CurrentInternalUser | null;
   loading: boolean;
@@ -26,8 +24,19 @@ export function useAuth(): UseAuthReturn {
     const checkOnboardingStatus = async () => {
       if (user?.id) {
         try {
-          const onboardingData = await getUserOnboardingCompletionTime(user.id);
-          setOnboardingCompleted(onboardingData?.isCompleted ?? false);
+          const response = await fetch(
+            `/api/user/onboarding-status?userId=${user.id}`
+          );
+          if (response.ok) {
+            const data = await response.json();
+            setOnboardingCompleted(data.onboardingCompleted);
+          } else {
+            console.error(
+              "Failed to check onboarding status:",
+              response.statusText
+            );
+            setOnboardingCompleted(false);
+          }
         } catch (error) {
           console.error("Failed to check onboarding status:", error);
           setOnboardingCompleted(false);
