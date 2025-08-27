@@ -19,6 +19,7 @@
       }
     ],
     "paths": {
+      "@/analytics/*": ["./src/features/analytics/*"],
       "@/automation/*": ["./src/features/automation/*"],
       "@/auth/*": ["./src/features/auth/*"],
       "@/features/*": ["./src/features/*"],
