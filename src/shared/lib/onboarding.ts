@@ -1,4 +1,4 @@
-import { type JsonValue } from "@/generated/prisma/runtime/library";
+import { type JsonValue } from "@/prisma/runtime/library";
 import {
   type OnboardingCompletionTime,
   type OnboardingStepData,
