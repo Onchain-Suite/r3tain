@@ -19,12 +19,13 @@
       }
     ],
     "paths": {
-      "@/home/*": ["./src/features/public/home/*"],
-      "@/auth/*": ["./src/features/auth/*"],
       "@/automation/*": ["./src/features/automation/*"],
-      "@/flows/*": ["./src/features/automation/flows/*"],
-      "@/templates/*": ["./src/features/automation/flow-templates/*"],
+      "@/auth/*": ["./src/features/auth/*"],
       "@/features/*": ["./src/features/*"],
+      "@/flows/*": ["./src/features/automation/flows/*"],
+      "@/home/*": ["./src/features/public/home/*"],
+      "@/onboarding/*": ["./src/features/onboarding-flow/*"],
+      "@/templates/*": ["./src/features/automation/flow-templates/*"],
       "@/components/*": ["./src/shared/components/*"],
       "@/hooks/*": ["./src/shared/hooks/*"],
       "@/lib/*": ["./src/shared/lib/*"],
