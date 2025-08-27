@@ -23,6 +23,7 @@
       "@/automation/*": ["./src/features/automation/*"],
       "@/auth/*": ["./src/features/auth/*"],
       "@/campaign/*": ["./src/features/campaign/*"],
+      "@/community/*": ["./src/features/community/*"],
       "@/dashboard/*": ["./src/features/dashboard/*"],
       "@/features/*": ["./src/features/*"],
       "@/flows/*": ["./src/features/automation/flows/*"],
