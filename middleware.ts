@@ -1,7 +1,7 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-import { prisma } from "@/lib/prisma";
+import { prismaEdge } from "@/lib/prisma-edge";
 import { stackServerApp } from "@/lib/stack";
 
 // Define route patterns
@@ -47,7 +47,7 @@ export async function middleware(req: NextRequest) {
       if (user) {
         // Check if user needs onboarding
         try {
-          const userProfile = await prisma.userProfile.findUnique({
+          const userProfile = await prismaEdge.userProfile.findUnique({
             where: { id: user.id },
             select: { onboardingCompleted: true, createdAt: true },
           });
@@ -87,7 +87,7 @@ export async function middleware(req: NextRequest) {
       // Special handling for onboarding route
       if (pathname === "/onboarding") {
         try {
-          const userProfile = await prisma.userProfile.findUnique({
+          const userProfile = await prismaEdge.userProfile.findUnique({
             where: { id: user.id },
             select: { onboardingCompleted: true },
           });

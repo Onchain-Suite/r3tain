@@ -1,7 +1,15 @@
 generator client {
-  provider        = "prisma-client-js"
-  output          = "./generated/prisma"
-  previewFeatures = ["driverAdapters"]
+  provider = "prisma-client"
+  previewFeatures = ["driverAdapters", "queryCompiler"]
+  output = "./generated/prisma"
+  runtime  = "nodejs"
+}
+
+generator edge {
+  provider = "prisma-client"
+  output = "./generated/prisma-edge"
+  previewFeatures = ["driverAdapters", "queryCompiler"]
+  runtime  = "edge-light"
 }
 
 datasource db {
