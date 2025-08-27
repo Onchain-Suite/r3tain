@@ -3,6 +3,7 @@ export * from "./floating-particle";
 export * from "./floating-symbol";
 export * from "./logo";
 export * from "./notification";
+export * from "./project-switcher";
 export * from "./recaptcha-status";
 export * from "./reusable-dropdown-menu";
 export * from "./search-trigger";

@@ -21,6 +21,7 @@
     "paths": {
       "@/home/*": ["./src/features/public/home/*"],
       "@/auth/*": ["./src/features/auth/*"],
+      "@/automation/*": ["./src/features/automation/*"],
       "@/features/*": ["./src/features/*"],
       "@/components/*": ["./src/shared/components/*"],
       "@/hooks/*": ["./src/shared/hooks/*"],
