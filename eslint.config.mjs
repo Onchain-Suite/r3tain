@@ -1,31 +1,34 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
 import { FlatCompat } from "@eslint/eslintrc";
 import js from "@eslint/js";
-import typescriptParser from "@typescript-eslint/parser";
 import typescriptPlugin from "@typescript-eslint/eslint-plugin";
+import typescriptParser from "@typescript-eslint/parser";
+import prettierConfig from "eslint-config-prettier";
+import importPlugin from "eslint-plugin-import";
+import jsxA11yPlugin from "eslint-plugin-jsx-a11y";
+import prettierPlugin from "eslint-plugin-prettier";
 import reactPlugin from "eslint-plugin-react";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
-import jsxA11yPlugin from "eslint-plugin-jsx-a11y";
-import importPlugin from "eslint-plugin-import";
-import unusedImportsPlugin from "eslint-plugin-unused-imports";
 import simpleImportSortPlugin from "eslint-plugin-simple-import-sort";
-import prettierConfig from "eslint-config-prettier";
-import prettierPlugin from "eslint-plugin-prettier";
+import unusedImportsPlugin from "eslint-plugin-unused-imports";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const compat = new FlatCompat({
   baseDirectory: __dirname,
+  recommendedConfig: js.configs.recommended,
 });
 
 const eslintConfig = [
   // Base recommended configs
   js.configs.recommended,
 
-  // Next.js configs
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  // Next.js configs - THIS IS THE KEY FIX
+  ...compat.config({
+  extends: ["next/core-web-vitals", "next/typescript", "next"],
+}),
 
   // Global ignores
   {
@@ -94,6 +97,10 @@ const eslintConfig = [
         node: {
           extensions: [".js", ".jsx", ".ts", ".tsx"],
         },
+      },
+      // Add Next.js settings if needed
+      next: {
+        rootDir: ".", // Adjust if your Next.js app is in a subdirectory
       },
     },
     rules: {
