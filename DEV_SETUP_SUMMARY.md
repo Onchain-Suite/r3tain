@@ -36,6 +36,12 @@ git commit -m "feat: ..." # Manual conventional commit
 # Development
 bun dev                 # Start dev server
 bun build              # Build for production
+
+# Database & Prisma (IMPORTANT)
+bun prisma generate     # Generate client after schema changes
+bun prisma migrate dev  # Apply database migrations
+bun prisma studio       # Open database GUI
+bun prisma db push      # Push schema without migration
 ```
 
 ## 🎯 **Current Status & Configuration**
@@ -74,6 +80,40 @@ docs: update README
 style: format code with prettier
 refactor: optimize component logic
 ```
+
+## 🗄️ **Prisma Database Workflow**
+
+### **Essential Reminder: Always Generate Client!**
+
+```bash
+# ⚠️ CRITICAL: Run after ANY schema changes
+bun prisma generate
+```
+
+### **Common Development Tasks**
+
+```bash
+# After pulling code with schema changes
+bun prisma generate && bun prisma migrate dev
+
+# Making schema changes
+# 1. Edit prisma/schema.prisma
+# 2. Generate client
+bun prisma generate
+# 3. Create migration
+bun prisma migrate dev --name "your-change-description"
+
+# Quick database tasks
+bun prisma studio           # Visual database browser
+bun prisma db push          # Push schema without migration
+bun prisma migrate reset    # Reset database (DEV ONLY)
+```
+
+### **Troubleshooting**
+
+- **TypeScript errors after schema changes?** → `bun prisma generate`
+- **"Prisma client not found" error?** → `bun prisma generate`
+- **Database out of sync?** → `bun prisma migrate dev`
 
 ## 🚀 **Ready to Use!**
 
