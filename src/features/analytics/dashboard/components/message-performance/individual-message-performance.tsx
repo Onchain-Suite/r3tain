@@ -13,7 +13,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useIsMobile } from "@/hooks/client";
 
 import { MessagePerformanceChart } from "./message-performance-chart";
 import { MessagePerformanceMetricSelector } from "./message-performance-metric-selector";

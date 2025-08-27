@@ -2,7 +2,7 @@
 
 import { DashboardLayoutContent } from "@/components/layout";
 import { dashboardRoutes } from "@/config/routes";
-import { useUserSync } from "@/hooks/use-user-sync";
+import { useUserSync } from "@/hooks/client";
 
 import { AudienceSection } from "./audience-section";
 import { AutomationsSection } from "./automations-section";

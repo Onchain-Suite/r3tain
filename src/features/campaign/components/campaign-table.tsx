@@ -8,7 +8,7 @@ import {
 } from "@/components/data-table";
 import { Table } from "@/components/ui";
 import { mockCampaigns } from "@/data/campaign";
-import { useDataTable } from "@/hooks/ui";
+import { useDataTable } from "@/hooks/client";
 
 import { columns } from "./column";
 

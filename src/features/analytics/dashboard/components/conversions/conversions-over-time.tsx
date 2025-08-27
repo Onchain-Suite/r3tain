@@ -8,7 +8,7 @@ import {
   generateMonthlyData,
   generateWeeklyData,
 } from "@/analytics/utils";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useIsMobile } from "@/hooks/client";
 
 import { ConversionsChart } from "./conversions-chart";
 import { ConversionsFilters } from "./conversions-filters";

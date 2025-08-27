@@ -18,7 +18,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { useIsMobile } from "@/hooks/client";
 
 import { ChartPagination, MetricDropdown, TimePeriodTabs } from "../shared";
 import { DeliveryChart } from "./delivery-chart";
