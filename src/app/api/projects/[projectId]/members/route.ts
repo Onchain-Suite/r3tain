@@ -9,9 +9,7 @@ import {
 import { stackServerApp } from "@/lib/stack";
 
 interface RouteParams {
-  params: {
-    projectId: string;
-  };
+  params: Promise<{ projectId: string }>;
 }
 
 // Get project members
@@ -22,8 +20,9 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
     if (!user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
+    const { projectId } = await params;
 
-    const members = await getProjectMembers(params.projectId);
+    const members = await getProjectMembers(projectId);
     return NextResponse.json({ members });
   } catch (error) {
     console.error("Error getting project members:", error);
@@ -42,6 +41,7 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
     if (!user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
+    const { projectId } = await params;
 
     const body = await request.json();
     const { userId, role = "member" } = body;
@@ -54,7 +54,7 @@ export async function POST(request: NextRequest, { params }: RouteParams) {
     }
 
     const memberId = await addUserToProject(
-      params.projectId,
+      projectId,
       userId,
       role,
       user.id // inviter
@@ -88,13 +88,14 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
         { status: 400 }
       );
     }
+    const { projectId } = await params;
 
     if (action === "remove") {
-      await removeUserFromProject(params.projectId, userId);
+      await removeUserFromProject(projectId, userId);
       return NextResponse.json({ success: true });
     } else if (role) {
       const updatedMember = await updateUserRoleInProject(
-        params.projectId,
+        projectId,
         userId,
         role
       );
