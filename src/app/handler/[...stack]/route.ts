@@ -1,31 +1,30 @@
 import { StackHandler, type StackServerApp } from "@stackframe/stack";
-// GET handler
 import type { NextRequest } from "next/server";
 
 import { stackServerApp } from "@/lib/stack";
 
 export async function GET(
   request: NextRequest,
-  context: { params: { stack: string[] } }
+  context: { params: Promise<{ stack: string[] }> }
 ) {
-  const res = await StackHandler({
+  const params = await context.params;
+
+  return StackHandler({
     app: stackServerApp as StackServerApp<true, string>,
     fullPage: false,
-    routeProps: { request, context },
+    routeProps: { request, context: { params } },
   });
-
-  return res ?? new Response("StackHandler returned nothing", { status: 500 });
 }
 
 export async function POST(
   request: NextRequest,
-  context: { params: { stack: string[] } }
+  context: { params: Promise<{ stack: string[] }> }
 ) {
-  const res = await StackHandler({
+  const params = await context.params;
+
+  return StackHandler({
     app: stackServerApp as StackServerApp<true, string>,
     fullPage: false,
-    routeProps: { request, context },
+    routeProps: { request, context: { params } },
   });
-
-  return res ?? new Response("StackHandler returned nothing", { status: 500 });
 }
