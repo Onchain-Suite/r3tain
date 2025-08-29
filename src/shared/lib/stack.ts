@@ -4,8 +4,10 @@ import { StackServerApp } from "@stackframe/stack";
 const createStackServerApp = () => {
   const secretKey = process.env.STACK_SECRET_SERVER_KEY;
   const projectId = process.env.NEXT_PUBLIC_STACK_PROJECT_ID;
+  const publishableClientKey =
+    process.env.NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY;
 
-  if (!secretKey || !projectId) {
+  if (!secretKey || !projectId || !publishableClientKey) {
     console.warn(
       "Stack Auth environment variables are missing. Stack Auth features will be limited."
     );
@@ -38,6 +40,7 @@ const createStackServerApp = () => {
 
   return new StackServerApp({
     projectId,
+    publishableClientKey,
     secretServerKey: secretKey,
     tokenStore: "nextjs-cookie",
     urls: {
