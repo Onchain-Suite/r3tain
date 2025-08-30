@@ -37,35 +37,37 @@ model User {
   updatedAt               DateTime @updatedAt @map("updated_at")
 
   // Relations
-  sessions                Session[]
-  accounts                Account[]
-  organizationMembers     OrganizationMember[]
-  projectMembers          ProjectMember[]
-  onboardingProgress      OnboardingProgress[]
-  campaigns               Campaign[]
-  automationFlows         AutomationFlow[]
-  emailTemplates          EmailTemplate[]
-  integrations            Integration[]
-  notifications           Notification[]
-  userSessions            UserSession[]
-  analyticsEvents         AnalyticsEvent[]
-  invitedOrgMembers       OrganizationMember[] @relation("InvitedBy")
-  invitedProjectMembers   ProjectMember[]      @relation("InvitedBy")
+  sessions              Session[]
+  accounts              Account[]
+  organizationMembers   OrganizationMember[]
+  projectMembers        ProjectMember[]
+  onboardingProgress    OnboardingProgress[]
+  campaigns             Campaign[]
+  automationFlows       AutomationFlow[]
+  emailTemplates        EmailTemplate[]
+  integrations          Integration[]
+  notifications         Notification[]
+  analyticsEvents       AnalyticsEvent[]
+  invitedOrgMembers     OrganizationMember[] @relation("InvitedBy")
+  invitedProjectMembers ProjectMember[]      @relation("InvitedBy")
 
   @@map("users")
 }
 
 model Session {
-  id        String   @id @default(cuid())
-  token     String   @unique
-  expiresAt DateTime @map("expires_at")
-  userId    String   @map("user_id")
-  ipAddress String?  @map("ip_address") @db.Inet
-  userAgent String?  @map("user_agent")
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  id             String   @id @default(cuid())
+  token          String   @unique
+  projectId      String?  @map("project_id")
+  expiresAt      DateTime @map("expires_at")
+  userId         String   @map("user_id")
+  ipAddress      String?  @map("ip_address")
+  userAgent      String?  @map("user_agent")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+  lastActivityAt DateTime @default(now()) @map("last_activity_at")
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  project Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("sessions")
 }
@@ -160,8 +162,8 @@ model Project {
   integrations       Integration[]
   notifications      Notification[]
   onboardingProgress OnboardingProgress[]
-  userSessions       UserSession[]
   analyticsEvents    AnalyticsEvent[]
+  sessions           Session[]
 
   @@unique([organizationId, slug])
   @@map("projects")
@@ -197,7 +199,7 @@ model OnboardingProgress {
   totalSteps           Int       @default(5) @map("total_steps")
   completionPercentage Decimal   @default(0.00) @map("completion_percentage") @db.Decimal(5, 2)
   isCompleted          Boolean   @default(false) @map("is_completed")
-  stepData             Json      @default("{}") @db.JsonB @map("step_data")
+  stepData             Json      @default("{}") @map("step_data") @db.JsonB
   timeSpentSeconds     Int       @default(0) @map("time_spent_seconds")
   sessionCount         Int       @default(1) @map("session_count")
   startedAt            DateTime  @default(now()) @map("started_at")
@@ -221,9 +223,9 @@ model OnboardingStepLog {
   stepName         String   @map("step_name")
   action           String
   timeSpentSeconds Int      @default(0) @map("time_spent_seconds")
-  stepData         Json     @default("{}") @db.JsonB @map("step_data")
+  stepData         Json     @default("{}") @map("step_data") @db.JsonB
   userAgent        String?  @map("user_agent")
-  ipAddress        String?  @map("ip_address") @db.Inet
+  ipAddress        String?  @map("ip_address")
   createdAt        DateTime @default(now()) @map("created_at")
 
   onboarding OnboardingProgress @relation(fields: [onboardingId], references: [id], onDelete: Cascade)
@@ -268,7 +270,7 @@ model Subscriber {
   phone          String?
   status         String    @default("active")
   tags           String[]  @default([])
-  customFields   Json      @default("{}") @db.JsonB @map("custom_fields")
+  customFields   Json      @default("{}") @map("custom_fields") @db.JsonB
   source         String?
   optedInAt      DateTime  @default(now()) @map("opted_in_at")
   unsubscribedAt DateTime? @map("unsubscribed_at")
@@ -290,7 +292,7 @@ model AutomationFlow {
   name           String
   description    String?
   triggerType    String   @map("trigger_type")
-  triggerConfig  Json     @default("{}") @db.JsonB @map("trigger_config")
+  triggerConfig  Json     @default("{}") @map("trigger_config") @db.JsonB
   actions        Json     @default("{}") @db.JsonB
   conditions     Json     @default("{}") @db.JsonB
   status         String   @default("draft")
@@ -334,10 +336,10 @@ model AnalyticsEvent {
   automationId String?  @map("automation_id")
   eventType    String   @map("event_type")
   eventName    String   @map("event_name")
-  eventData    Json     @default("{}") @db.JsonB @map("event_data")
+  eventData    Json     @default("{}") @map("event_data") @db.JsonB
   sessionId    String?  @map("session_id")
   userAgent    String?  @map("user_agent")
-  ipAddress    String?  @map("ip_address") @db.Inet
+  ipAddress    String?  @map("ip_address")
   referrer     String?
   utmSource    String?  @map("utm_source")
   utmMedium    String?  @map("utm_medium")
@@ -353,23 +355,6 @@ model AnalyticsEvent {
   automation AutomationFlow? @relation(fields: [automationId], references: [id], onDelete: SetNull)
 
   @@map("analytics_events")
-}
-
-model UserSession {
-  id             String   @id @default(cuid())
-  userId         String   @map("user_id")
-  projectId      String?  @map("project_id")
-  sessionToken   String   @unique @map("session_token")
-  expiresAt      DateTime @map("expires_at")
-  userAgent      String?  @map("user_agent")
-  ipAddress      String?  @map("ip_address") @db.Inet
-  lastActivityAt DateTime @default(now()) @map("last_activity_at")
-  createdAt      DateTime @default(now()) @map("created_at")
-
-  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  project Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
-
-  @@map("user_sessions")
 }
 
 model Notification {

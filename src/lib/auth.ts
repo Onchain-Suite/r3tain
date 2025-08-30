@@ -4,6 +4,8 @@ import { nextCookies } from "better-auth/next-js";
 
 import { prisma } from "@/lib/prisma";
 
+import { getFullName } from "./utils";
+
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: "postgresql",
@@ -18,6 +20,18 @@ export const auth = betterAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
       accessType: "offline",
       prompt: "select_account consent",
+      mapProfileToUser: (profile) => {
+        return {
+          firstName: profile.given_name,
+          lastName: profile.family_name,
+          name:
+            getFullName(profile.given_name, profile.family_name) ??
+            getFullName(profile.name),
+          email: profile.email,
+          image: profile.picture,
+          emailVerified: profile.email_verified,
+        };
+      },
     },
   },
   // emailVerification: {
@@ -36,6 +50,14 @@ export const auth = betterAuth({
   },
   user: {
     additionalFields: {
+      firstName: {
+        type: "string",
+        required: false,
+      },
+      lastName: {
+        type: "string",
+        required: false,
+      },
       role: {
         type: "string",
         required: false,

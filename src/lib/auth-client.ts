@@ -10,7 +10,6 @@ export const signInWithGoogle = async () => {
       provider: "google",
       callbackURL: dashboardRoutes.home,
     });
-    console.log("🚀 ~ signInWithGoogle ~ data:", data);
     return data;
   } catch (error) {
     console.error("Google sign-in error:", error);
