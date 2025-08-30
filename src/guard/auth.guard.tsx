@@ -101,14 +101,5 @@ export async function ProtectedLayout({ children }: { children: ReactNode }) {
     redirect("/");
   }
 
-  return (
-    <div className="protected-layout">
-      {/* Add common protected layout elements */}
-      <header>
-        <p>Welcome, {session.user.email}</p>
-        {/* Navigation, user menu, etc. */}
-      </header>
-      <main>{children}</main>
-    </div>
-  );
+  return <>{children}</>;
 }

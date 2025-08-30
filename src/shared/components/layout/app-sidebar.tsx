@@ -17,12 +17,6 @@ import { NavMain } from "./nav-main";
 import { NavUser } from "./nav-user";
 import type { AppSidebarProps } from "./types";
 
-const userData = {
-  name: "Alex Johnson",
-  email: "alex@r3tain.io",
-  avatar: "/placeholder.svg?height=32&width=32",
-};
-
 export function AppSidebar({ navItems, route, ...rest }: AppSidebarProps) {
   const { state } = useSidebar();
 
@@ -54,7 +48,7 @@ export function AppSidebar({ navItems, route, ...rest }: AppSidebarProps) {
       </SidebarContent>
 
       <SidebarFooter>
-        <NavUser user={userData} />
+        <NavUser />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

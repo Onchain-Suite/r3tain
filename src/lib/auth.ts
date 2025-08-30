@@ -5,6 +5,7 @@ import { nextCookies } from "better-auth/next-js";
 import { prisma } from "@/lib/prisma";
 
 import { getFullName } from "./utils";
+import { env } from "./validations";
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
@@ -16,8 +17,8 @@ export const auth = betterAuth({
   },
   socialProviders: {
     google: {
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
       accessType: "offline",
       prompt: "select_account consent",
       mapProfileToUser: (profile) => {
