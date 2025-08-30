@@ -4,11 +4,12 @@ import { prisma } from "@/lib/prisma";
 import { getFullName } from "@/lib/utils";
 
 import { type SignUpFormData } from "@/auth/validation";
-import { requireAuth } from "@/guard/auth.guard";
+import { getAuthSession } from "@/guard/auth.guard";
 
 interface UserSyncResult {
   success: boolean;
   error?: string;
+  redirectTo?: string;
 }
 
 export async function syncUserDataWithGuard(
@@ -16,7 +17,15 @@ export async function syncUserDataWithGuard(
 ): Promise<UserSyncResult> {
   try {
     // Use the auth guard - will redirect if not authenticated
-    const session = await requireAuth();
+    const session = await getAuthSession();
+
+    if (!session) {
+      return {
+        success: false,
+        error: "Authentication required",
+        redirectTo: "/",
+      };
+    }
     const { user } = session;
 
     await prisma.user.upsert({
