@@ -12,7 +12,6 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
-import type { ImportError, ImportWarning } from "@/community/types";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -23,6 +22,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+
+import type { ImportError, ImportWarning } from "@/community/types";
 
 interface ErrorDetailsModalProps {
   isOpen: boolean;

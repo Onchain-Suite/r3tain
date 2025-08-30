@@ -17,13 +17,13 @@ export async function POST(request: NextRequest) {
     const { firstName, lastName } = body;
 
     // Check if user profile exists in our database
-    const existingProfile = await prisma.userProfile.findUnique({
+    const existingProfile = await prisma.user.findUnique({
       where: { id: user.id },
     });
 
     if (!existingProfile) {
       // Create user profile in our database
-      await prisma.userProfile.create({
+      await prisma.user.create({
         data: {
           id: user.id,
           email: user.primaryEmail ?? "",
@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
       });
     } else if (firstName || lastName) {
       // Update existing profile with new data
-      await prisma.userProfile.update({
+      await prisma.user.update({
         where: { id: user.id },
         data: {
           ...(firstName && { firstName }),

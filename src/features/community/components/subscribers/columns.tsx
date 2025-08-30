@@ -3,7 +3,6 @@
 import type { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal, Star } from "lucide-react";
 
-import type { Subscriber } from "@/community/types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -15,6 +14,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
+import type { Subscriber } from "@/community/types";
 
 export const columns: ColumnDef<Subscriber>[] = [
   {

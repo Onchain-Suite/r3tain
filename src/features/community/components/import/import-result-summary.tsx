@@ -10,9 +10,10 @@ import {
   XCircle,
 } from "lucide-react";
 
-import type { ImportResult } from "@/community/types";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+import type { ImportResult } from "@/community/types";
 
 interface ImportResultSummaryProps {
   result: ImportResult;

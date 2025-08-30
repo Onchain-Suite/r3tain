@@ -14,6 +14,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Progress } from "@/components/ui/progress";
+
 import { type Campaign } from "@/types/campaign";
 
 export const columns: ColumnDef<Campaign>[] = [

@@ -1,8 +1,8 @@
 "use client";
 
-import type { FieldMapping, R3tainField } from "@/community/types";
-
 import { FieldMappingRow } from "./field-mapping-row";
+
+import type { FieldMapping, R3tainField } from "@/community/types";
 
 interface MappingTableBodyProps {
   mappings: FieldMapping[];

@@ -6,6 +6,7 @@ import Link from "next/link";
 
 import { FloatingParticle } from "@/components/common";
 import { Button } from "@/components/ui/button";
+
 import { authRoutes } from "@/config/routes";
 
 export function HeroSection() {

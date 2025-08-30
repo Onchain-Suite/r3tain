@@ -1,7 +1,6 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useStackApp } from "@stackframe/stack";
 import { motion } from "framer-motion";
 import { Mail, User } from "lucide-react";
 import Link from "next/link";
@@ -12,8 +11,12 @@ import { toast } from "sonner";
 
 import { CheckboxFormField, InputFormField } from "@/components/form-fields";
 import { Form, LoadingButton } from "@/components/ui";
+
 import { authRoutes } from "@/config/routes";
 import { useLocalStorage, useReCaptcha } from "@/hooks/client";
+import { signInWithGoogle } from "@/lib/auth-client";
+import { syncUserDataWithGuard } from "@/server/sync-user";
+import { signUp } from "@/server/users";
 
 import { type SignUpFormData, signUpSchema } from "../validation";
 import {
@@ -33,7 +36,6 @@ export function SignUpForm({ onSwitchToSignIn }: SignUpFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const { push } = useRouter();
   const { setValue } = useLocalStorage<SignUpFormData | null>("user", null);
-  const app = useStackApp();
   const { executeReCaptcha, isLoaded } = useReCaptcha();
 
   const form = useForm<SignUpFormData>({
@@ -79,24 +81,13 @@ export function SignUpForm({ onSwitchToSignIn }: SignUpFormProps) {
         return;
       }
 
-      await app.signUpWithCredential({
-        email: data.email,
-        password: data.password,
-      });
+      await signUp(data);
 
       // Store form data for onboarding
       setValue(data);
 
       // Sync user to our database with additional profile data
-      await fetch("/api/auth/sync-user", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          firstName: data.firstName,
-          lastName: data.lastName,
-          marketingEmails: data.marketingEmails,
-        }),
-      });
+      await syncUserDataWithGuard(data);
 
       toast.success(
         "Account created successfully! Please check your email to verify your account."
@@ -114,10 +105,10 @@ export function SignUpForm({ onSwitchToSignIn }: SignUpFormProps) {
   const handleOAuthSignUp = async (provider: string) => {
     setIsLoading(true);
     try {
-      await app.signInWithOAuth(provider as "google");
+      await signInWithGoogle();
 
       // Sync user to our database
-      await fetch("/api/auth/sync-user", { method: "POST" });
+      // await fetch("/api/auth/sync-user", { method: "POST" });
     } catch (error: unknown) {
       console.error("OAuth error:", error);
       toast.error(`Failed to sign up with ${provider}`);

@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { Plus, Users } from "lucide-react";
 import { useState } from "react";
 
-import type { Community } from "@/community/types";
 import { Badge } from "@/components/ui/badge";
 import {
   Select,
@@ -15,6 +14,8 @@ import {
 } from "@/components/ui/select";
 
 import { CreateCommunityModal } from "./create-community-modal";
+
+import type { Community } from "@/community/types";
 
 interface CommunitySelectorProps {
   communities: Community[];

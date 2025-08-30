@@ -12,19 +12,19 @@ export async function POST() {
     }
 
     // Update user profile to mark onboarding as completed
-    await prisma.userProfile.upsert({
+    await prisma.user.upsert({
       where: { id: user.id },
       update: {
         onboardingCompleted: true,
         name: user.displayName ?? user.primaryEmail?.split("@")[0] ?? "User",
         email: user.primaryEmail ?? "",
-        profilePicture: user.profileImageUrl,
+        image: user.profileImageUrl,
       },
       create: {
         id: user.id,
         name: user.displayName ?? user.primaryEmail?.split("@")[0] ?? "User",
         email: user.primaryEmail ?? "",
-        profilePicture: user.profileImageUrl,
+        image: user.profileImageUrl,
         onboardingCompleted: true,
       },
     });

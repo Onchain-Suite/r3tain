@@ -15,7 +15,9 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui";
+
 import { dashboardRoutes } from "@/config/routes";
+
 import type { NavItem } from "@/types/ui";
 
 export function NavMain({ items }: { items: NavItem[] }) {

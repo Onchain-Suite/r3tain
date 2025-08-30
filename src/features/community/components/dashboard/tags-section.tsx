@@ -2,9 +2,10 @@
 
 import { Send, Tag } from "lucide-react";
 
-import type { TagData } from "@/community/types";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+import type { TagData } from "@/community/types";
 
 interface TagsSectionProps {
   tags: TagData[];

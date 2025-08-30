@@ -19,6 +19,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
 import type { SavedSegment } from "@/segment/types";
 
 interface SegmentListItemProps {

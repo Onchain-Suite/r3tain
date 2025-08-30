@@ -14,7 +14,7 @@ export async function PUT(request: NextRequest) {
     const preferences = await request.json();
 
     // Update user profile with notification preferences
-    await prisma.userProfile.update({
+    await prisma.user.update({
       where: { id: user.id },
       data: {
         notificationPreferences: JSON.stringify(preferences),
@@ -39,7 +39,7 @@ export async function GET() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const profile = await prisma.userProfile.findUnique({
+    const profile = await prisma.user.findUnique({
       where: { id: user.id },
       select: { notificationPreferences: true },
     });

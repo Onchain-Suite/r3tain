@@ -3,8 +3,9 @@
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
-import { AuthContainer } from "@/auth/components";
 import { AnimatedLoading } from "@/components/loading";
+
+import { AuthContainer } from "@/auth/components";
 
 export default function ResetPasswordPage() {
   return (

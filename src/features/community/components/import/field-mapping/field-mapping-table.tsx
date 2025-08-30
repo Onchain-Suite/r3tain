@@ -3,11 +3,11 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-import type { FieldMapping, R3tainField } from "@/community/types";
-
 import { MappingSummary } from "./mapping-summary";
 import { MappingTableBody } from "./mapping-table-body";
 import { MappingTableHeader } from "./mapping-table-header";
+
+import type { FieldMapping, R3tainField } from "@/community/types";
 
 interface FieldMappingTableProps {
   mappings: FieldMapping[];

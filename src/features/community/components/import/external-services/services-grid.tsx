@@ -1,8 +1,8 @@
 "use client";
 
-import type { ExternalService } from "@/community/types";
-
 import { ServiceCard } from "./service-card";
+
+import type { ExternalService } from "@/community/types";
 
 interface ServicesGridProps {
   services: ExternalService[];

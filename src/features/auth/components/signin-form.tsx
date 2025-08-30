@@ -1,7 +1,6 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useStackApp } from "@stackframe/stack";
 import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -11,8 +10,11 @@ import { toast } from "sonner";
 
 import { InputFormField } from "@/components/form-fields";
 import { Form, LoadingButton } from "@/components/ui";
+
 import { dashboardRoutes } from "@/config/routes";
 import { useReCaptcha } from "@/hooks/client";
+import { signInWithGoogle } from "@/lib/auth-client";
+import { signIn } from "@/server/users";
 
 import { type SignInFormData, signInSchema } from "../validation";
 import {
@@ -35,7 +37,6 @@ export function SignInForm({
   const [isLoading, setIsLoading] = useState(false);
   const { push } = useRouter();
   const searchParams = useSearchParams();
-  const app = useStackApp();
   const { executeReCaptcha, isLoaded } = useReCaptcha();
 
   const form = useForm<SignInFormData>({
@@ -74,10 +75,7 @@ export function SignInForm({
         return;
       }
 
-      await app.signInWithCredential({
-        email: data.email,
-        password: data.password,
-      });
+      await signIn(data);
 
       toast.success("Successfully signed in!");
 
@@ -108,13 +106,14 @@ export function SignInForm({
       setIsLoading(false);
     }
   };
+
   const handleOAuthSignIn = async (provider: string) => {
     setIsLoading(true);
     try {
-      await app.signInWithOAuth(provider as "google");
+      await signInWithGoogle();
 
       // Sync user to our database
-      await fetch("/api/auth/sync-user", { method: "POST" });
+      // await fetch("/api/auth/sync-user", { method: "POST" });
     } catch (error) {
       console.error("OAuth error:", error);
       toast.error(`Failed to sign in with ${provider}`);

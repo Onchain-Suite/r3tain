@@ -45,3 +45,52 @@ export function getInitials(firstName?: string, lastName?: string): string {
 
   return "A";
 }
+
+function capitalizeWord(word: string, isFirstWord: boolean): string {
+  const lower = word.toLowerCase();
+
+  // common name prefixes that should stay lowercase unless they're first
+  const prefixes = [
+    "van",
+    "von",
+    "de",
+    "da",
+    "di",
+    "del",
+    "della",
+    "la",
+    "le",
+    "du",
+    "dos",
+    "das",
+    "der",
+  ];
+
+  if (!isFirstWord && prefixes.includes(lower)) {
+    return lower;
+  }
+
+  // handle hyphenated or apostrophe words
+  return word
+    .split(/([-'])/g)
+    .map((part) =>
+      /^[a-zA-Z]+$/.test(part)
+        ? `${part.charAt(0).toUpperCase()}${part.slice(1).toLowerCase()}`
+        : part
+    )
+    .join("");
+}
+
+function capitalizeName(input?: string, isFirstName = false): string {
+  if (!input) return "";
+  const parts = input.trim().split(/\s+/);
+  return parts
+    .map((part, idx) => capitalizeWord(part, isFirstName && idx === 0))
+    .join(" ");
+}
+
+export function getFullName(firstName?: string, lastName?: string): string {
+  if (!firstName && !lastName) return "";
+  const full = `${capitalizeName(firstName, true)} ${capitalizeName(lastName)}`;
+  return full.trim();
+}

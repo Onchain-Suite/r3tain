@@ -1,9 +1,11 @@
 import { Suspense } from "react";
 
+import { DashboardLayoutContent } from "@/components/layout";
+
+import { dashboardRoutes } from "@/config/routes";
+
 import { ReportsPage } from "@/analytics/reports/page";
 import { AutomationPageSkeleton } from "@/automation/components";
-import { DashboardLayoutContent } from "@/components/layout";
-import { dashboardRoutes } from "@/config/routes";
 
 const crumbs = [
   { label: "Home", href: dashboardRoutes.home },

@@ -27,6 +27,7 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from "@/components/ui/command";
+
 import { dashboardRoutes } from "@/config/routes";
 
 interface CommandPaletteProps {

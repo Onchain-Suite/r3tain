@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 
 import type { Sidebar } from "@/components/ui/sidebar";
+
 import type { CrumbItem, NavItem } from "@/types/ui";
 
 export interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {

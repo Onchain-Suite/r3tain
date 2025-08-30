@@ -12,7 +12,7 @@ export async function GET() {
     }
 
     // Check if user has completed onboarding
-    const userProfile = await prisma.userProfile.findUnique({
+    const userProfile = await prisma.user.findUnique({
       where: { id: user.id },
       select: {
         onboardingCompleted: true,
@@ -22,12 +22,12 @@ export async function GET() {
 
     // If no profile exists, create one
     if (!userProfile) {
-      await prisma.userProfile.create({
+      await prisma.user.create({
         data: {
           id: user.id,
           name: user.displayName ?? user.primaryEmail?.split("@")[0] ?? "User",
           email: user.primaryEmail ?? "",
-          profilePicture: user.profileImageUrl,
+          image: user.profileImageUrl,
           onboardingCompleted: false,
         },
       });

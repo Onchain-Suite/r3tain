@@ -3,7 +3,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { stackServerApp } from "@/lib/stack";
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const user = await stackServerApp.getUser();
 
@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const profile = await prisma.userProfile.findUnique({
+    const profile = await prisma.user.findUnique({
       where: { id: user.id },
     });
 
@@ -40,7 +40,7 @@ export async function PUT(request: NextRequest) {
     const data = await request.json();
     const { name, phone, companyName } = data;
 
-    const updatedProfile = await prisma.userProfile.upsert({
+    const updatedProfile = await prisma.user.upsert({
       where: { id: user.id },
       update: {
         name,
@@ -49,7 +49,7 @@ export async function PUT(request: NextRequest) {
 
         // Keep existing fields that might be set during sync
         email: user.primaryEmail ?? data.email,
-        profilePicture: user.profileImageUrl,
+        image: user.profileImageUrl,
         emailVerified: user.primaryEmailVerified ?? false,
       },
       create: {
@@ -59,7 +59,7 @@ export async function PUT(request: NextRequest) {
         phone,
         companyName,
 
-        profilePicture: user.profileImageUrl,
+        image: user.profileImageUrl,
         emailVerified: user.primaryEmailVerified ?? false,
         onboardingCompleted: true, // If they're editing profile, assume onboarding is done
       },

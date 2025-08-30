@@ -1,9 +1,9 @@
 "use client";
 
-import type { ImportSummary } from "@/community/types";
-
 import { ImportSummaryCard } from "../import-summary-card";
 import { PlanLimitWarning } from "../plan-limit-warning";
+
+import type { ImportSummary } from "@/community/types";
 
 interface SummarySectionProps {
   summary: ImportSummary;

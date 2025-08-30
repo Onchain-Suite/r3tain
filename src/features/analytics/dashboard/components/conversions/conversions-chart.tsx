@@ -2,9 +2,10 @@
 
 import { Bar, BarChart, XAxis, YAxis } from "recharts";
 
+import { ChartContainer, ChartTooltip } from "@/components/ui/chart";
+
 import { type Radius } from "@/analytics/dashboard/types";
 import { type Channel, type ChartDataPoint } from "@/analytics/types";
-import { ChartContainer, ChartTooltip } from "@/components/ui/chart";
 
 interface ConversionsChartProps {
   data: ChartDataPoint[];

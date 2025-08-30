@@ -3,9 +3,10 @@
 import { motion } from "framer-motion";
 import { CheckCircle, RefreshCw, Tag, Upload, Users } from "lucide-react";
 
-import type { ImportSummary } from "@/community/types";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+import type { ImportSummary } from "@/community/types";
 
 interface ImportSummaryCardProps {
   summary: ImportSummary;

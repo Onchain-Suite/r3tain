@@ -2,7 +2,6 @@
 
 import { Check } from "lucide-react";
 
-import { type Channel } from "@/analytics/types";
 import {
   Select,
   SelectContent,
@@ -10,6 +9,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
+import { type Channel } from "@/analytics/types";
 
 const channels = [
   { value: "email", label: "Email" },

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 
 import { FloatingParticle, FloatingSymbol } from "@/components/common";
 import { Button } from "@/components/ui";
+
 import { authRoutes } from "@/config/routes";
 
 export default function ForbiddenPage() {

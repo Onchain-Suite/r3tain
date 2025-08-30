@@ -246,7 +246,7 @@ export async function getProjectById(projectId: string) {
     where: { id: projectId },
     include: {
       organization: true,
-      projectMembers: {
+      members: {
         where: { isActive: true },
         include: {
           user: {
@@ -275,7 +275,7 @@ export async function switchUserProject(
   }
 
   // Update user's last active time
-  await prisma.userProfile.update({
+  await prisma.user.update({
     where: { id: userId },
     data: { lastActiveAt: new Date() },
   });

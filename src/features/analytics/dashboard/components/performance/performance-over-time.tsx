@@ -3,14 +3,6 @@
 import { Check } from "lucide-react";
 import { useMemo, useState } from "react";
 
-import type { Period } from "@/analytics/types";
-import {
-  generatePerformanceDailyData,
-  generatePerformanceMonthlyData,
-  generatePerformanceWeeklyData,
-  getPerformanceMetricValue,
-  type PerformanceMetric,
-} from "@/analytics/utils";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -28,11 +20,21 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
 import { cn } from "@/lib/utils";
 
 import { metricOptions } from "./metric-options";
 import { PerformanceChart } from "./performance-chart";
 import { PerformanceMetricDisplay } from "./performance-metric-display";
+
+import type { Period } from "@/analytics/types";
+import {
+  generatePerformanceDailyData,
+  generatePerformanceMonthlyData,
+  generatePerformanceWeeklyData,
+  getPerformanceMetricValue,
+  type PerformanceMetric,
+} from "@/analytics/utils";
 
 interface PerformanceOverTimeProps {
   dateRange: string;

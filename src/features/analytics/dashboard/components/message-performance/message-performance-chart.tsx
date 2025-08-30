@@ -3,6 +3,8 @@
 import { format } from "date-fns";
 import { Bar, BarChart, Cell, XAxis, YAxis } from "recharts";
 
+import { ChartContainer, ChartTooltip } from "@/components/ui/chart";
+
 import { type CustomTooltipProps } from "@/analytics/dashboard/types";
 import {
   getMPMetricLabel,
@@ -10,7 +12,6 @@ import {
   type MessageMetric,
   type MessagePerformanceData,
 } from "@/analytics/utils";
-import { ChartContainer, ChartTooltip } from "@/components/ui/chart";
 
 interface MessagePerformanceChartProps {
   data: MessagePerformanceData[];

@@ -4,10 +4,11 @@ import { motion } from "framer-motion";
 import { Copy } from "lucide-react";
 import { useState } from "react";
 
-import { type ValidationResult, ValidationService } from "@/community/services";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
+
+import { type ValidationResult, ValidationService } from "@/community/services";
 
 interface PasteAreaProps {
   onDataChange: (data: string, validation: ValidationResult) => void;

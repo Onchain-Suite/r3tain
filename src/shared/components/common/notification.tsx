@@ -14,10 +14,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
 import { dashboardRoutes } from "@/config/routes";
-import { initialNotifications } from "@/data/notifications";
 import { cn } from "@/lib/utils";
+
 import type { Notification, NotificationType } from "@/types/notification";
+
+import { initialNotifications } from "@/data/notifications";
 
 export function NotificationBell() {
   const [notifications, setNotifications] =

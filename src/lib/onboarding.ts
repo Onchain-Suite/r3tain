@@ -139,7 +139,7 @@ export async function getOnboardingProgress(
       },
     },
     include: {
-      onboardingStepLogs: {
+      stepLogs: {
         orderBy: { createdAt: "desc" },
         take: 10,
       },

@@ -2,6 +2,8 @@
 
 import { Dot, Line, LineChart, XAxis, YAxis } from "recharts";
 
+import { ChartContainer, ChartTooltip } from "@/components/ui/chart";
+
 import type {
   CustomDotProps,
   CustomTooltipProps,
@@ -12,7 +14,6 @@ import {
   isPercentageMetric,
   type PerformanceMetric,
 } from "@/analytics/utils";
-import { ChartContainer, ChartTooltip } from "@/components/ui/chart";
 
 interface PerformanceChartProps {
   data: PerformanceChartData[];

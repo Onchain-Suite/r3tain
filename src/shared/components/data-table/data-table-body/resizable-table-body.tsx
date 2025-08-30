@@ -1,6 +1,7 @@
 import { type Cell, flexRender } from "@tanstack/react-table";
 
 import { TableBody, TableCell, TableRow } from "@/components/ui";
+
 import { getPinningStyles } from "@/lib/utils";
 
 import type { DataTableBodyProps } from "../types";

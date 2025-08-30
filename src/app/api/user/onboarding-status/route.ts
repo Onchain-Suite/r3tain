@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 
-import { getUserOnboardingCompletionTime } from "@/shared/lib/onboarding";
+import { getUserOnboardingCompletionTime } from "@/lib/onboarding";
 
 export async function GET(request: NextRequest) {
   try {

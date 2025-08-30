@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { CheckCircle } from "lucide-react";
 import { useState } from "react";
 
+import { Button } from "@/components/ui/button";
+
 import {
   AdditionalIntegrations,
   ConnectionStatus,
@@ -12,7 +14,6 @@ import {
 import { PageHeader } from "@/community/components/shared";
 import { useImportNavigation } from "@/community/hooks";
 import { EXTERNAL_SERVICES } from "@/community/types";
-import { Button } from "@/components/ui/button";
 
 // Simplified breadcrumb for external services flow
 const externalServicesBreadcrumb = [

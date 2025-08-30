@@ -9,13 +9,15 @@ import {
   YAxis,
 } from "recharts";
 
+import { ChartContainer, ChartTooltip } from "@/components/ui/chart";
+
+import { type Primitive } from "@/types/ui";
+
 import type {
   CustomDotProps,
   CustomTooltipProps,
 } from "@/analytics/dashboard/types";
 import { type DeliveryMetric, getMetricLabel } from "@/analytics/utils";
-import { ChartContainer, ChartTooltip } from "@/components/ui/chart";
-import { type Primitive } from "@/types/ui";
 
 interface DeliveryChartProps {
   data: {

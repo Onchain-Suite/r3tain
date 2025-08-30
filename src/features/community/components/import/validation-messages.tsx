@@ -2,9 +2,10 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 
-import type { ValidationResult } from "@/community/services";
 import { StatusIndicator } from "@/components/ui";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+
+import type { ValidationResult } from "@/community/services";
 
 interface ValidationMessagesProps {
   validation: ValidationResult | null;

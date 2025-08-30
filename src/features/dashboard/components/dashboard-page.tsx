@@ -2,9 +2,9 @@
 
 import { useSearchParams } from "next/navigation";
 
-import { NewUserDashboard } from "@/features/dashboard/new-user/components";
-
 import { ReturningUserDashboard } from "./returning-user-dashboard";
+
+import { NewUserDashboard } from "@/features/dashboard/new-user/components";
 
 export function DashboardPageContent() {
   const searchParams = useSearchParams();

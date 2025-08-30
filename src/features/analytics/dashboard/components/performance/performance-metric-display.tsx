@@ -3,16 +3,17 @@
 import { Info, TrendingDown, TrendingUp } from "lucide-react";
 
 import {
-  getPerformanceMetricLabel,
-  isPercentageMetric,
-  type PerformanceMetric,
-} from "@/analytics/utils";
-import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+
+import {
+  getPerformanceMetricLabel,
+  isPercentageMetric,
+  type PerformanceMetric,
+} from "@/analytics/utils";
 
 interface PerformanceMetricDisplayProps {
   selectedMetric: PerformanceMetric;

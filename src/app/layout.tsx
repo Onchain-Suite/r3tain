@@ -1,9 +1,9 @@
-import "@/styles/globals.css";
-
 import type { Metadata, Viewport } from "next";
 import { Inter, Manrope } from "next/font/google";
 
 import { seoConfig } from "@/lib/seo-config";
+
+import "@/styles/globals.css";
 import { RootProviders } from "@/shared/providers";
 
 const inter = Inter({
