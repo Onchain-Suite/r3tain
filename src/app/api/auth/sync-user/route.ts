@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
           firstName:
             firstName ?? (user.clientMetadata?.firstName as string) ?? "",
           lastName: lastName ?? (user.clientMetadata?.lastName as string) ?? "",
-          profilePicture: user.profileImageUrl ?? null,
+          image: user.profileImageUrl ?? null,
         },
       });
 
