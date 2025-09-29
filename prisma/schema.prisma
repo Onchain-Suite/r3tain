@@ -106,17 +106,16 @@ model Verification {
 }
 
 model Organization {
-  id          String   @id @default(cuid())
-  name        String
-  slug        String   @unique
-  description String?
-  logoUrl     String?  @map("logo_url")
-  settings    Json     @default("{}") @db.JsonB
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
-
-  members  OrganizationMember[]
-  projects Project[]
+  id                  String               @id @default(cuid())
+  name                String
+  slug                String               @unique
+  description         String?
+  logoUrl             String?              @map("logo_url")
+  settings            Json                 @default("{}")
+  createdAt           DateTime             @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt           DateTime             @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+  organizationMembers OrganizationMember[]
+  projects            Project[]
 
   @@map("organizations")
 }
@@ -143,20 +142,15 @@ model OrganizationMember {
 }
 
 model Project {
-  id             String   @id @default(cuid())
-  organizationId String?  @map("organization_id")
-  name           String
-  description    String?
-  slug           String
-  settings       Json     @default("{}") @db.JsonB
-  isActive       Boolean  @default(true) @map("is_active")
-  createdAt      DateTime @default(now()) @map("created_at")
-  updatedAt      DateTime @updatedAt @map("updated_at")
-
-  organization       Organization?        @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  members            ProjectMember[]
-  campaigns          Campaign[]
-  subscribers        Subscriber[]
+  id                 String               @id @default(cuid())
+  organizationId     String?              @map("organization_id")
+  name               String
+  description        String?
+  slug               String
+  settings           Json                 @default("{}")
+  isActive           Boolean              @default(true) @map("is_active")
+  createdAt          DateTime             @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt          DateTime             @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
   automationFlows    AutomationFlow[]
   emailTemplates     EmailTemplate[]
   integrations       Integration[]
@@ -164,6 +158,10 @@ model Project {
   onboardingProgress OnboardingProgress[]
   analyticsEvents    AnalyticsEvent[]
   sessions           Session[]
+  Organization       Organization?        @relation(fields: [organizationId], references: [id])
+  ProjectMember      ProjectMember[]
+  Campaign           Campaign[]
+  Subscriber         Subscriber[]
 
   @@unique([organizationId, slug])
   @@map("projects")
@@ -174,44 +172,42 @@ model ProjectMember {
   projectId   String    @map("project_id")
   userId      String    @map("user_id")
   role        String    @default("member")
-  permissions Json      @default("{}") @db.JsonB
+  permissions Json      @default("{}")
   invitedBy   String?   @map("invited_by")
-  invitedAt   DateTime? @map("invited_at")
-  joinedAt    DateTime  @default(now()) @map("joined_at")
+  invitedAt   DateTime? @map("invited_at") @db.Timestamptz(6)
+  joinedAt    DateTime  @default(now()) @map("joined_at") @db.Timestamptz(6)
   isActive    Boolean   @default(true) @map("is_active")
-  createdAt   DateTime  @default(now()) @map("created_at")
-  updatedAt   DateTime  @updatedAt @map("updated_at")
-
-  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  inviter User?   @relation("InvitedBy", fields: [invitedBy], references: [id])
+  createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime  @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+  inviter     User?     @relation("InvitedBy", fields: [invitedBy], references: [id])
+  project     Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([projectId, userId])
   @@map("project_members")
 }
 
 model OnboardingProgress {
-  id                   String    @id @default(cuid())
-  userId               String    @map("user_id")
-  projectId            String?   @map("project_id")
-  currentStep          String    @default("welcome") @map("current_step")
-  completedSteps       String[]  @default([]) @map("completed_steps")
-  totalSteps           Int       @default(5) @map("total_steps")
-  completionPercentage Decimal   @default(0.00) @map("completion_percentage") @db.Decimal(5, 2)
-  isCompleted          Boolean   @default(false) @map("is_completed")
-  stepData             Json      @default("{}") @map("step_data") @db.JsonB
-  timeSpentSeconds     Int       @default(0) @map("time_spent_seconds")
-  sessionCount         Int       @default(1) @map("session_count")
-  startedAt            DateTime  @default(now()) @map("started_at")
-  completedAt          DateTime? @map("completed_at")
-  lastActivityAt       DateTime  @default(now()) @map("last_activity_at")
-  abandonedAt          DateTime? @map("abandoned_at")
-  createdAt            DateTime  @default(now()) @map("created_at")
-  updatedAt            DateTime  @updatedAt @map("updated_at")
-
-  user     User                @relation(fields: [userId], references: [id], onDelete: Cascade)
-  project  Project?            @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  stepLogs OnboardingStepLog[]
+  id                   String              @id @default(cuid())
+  userId               String              @map("user_id")
+  projectId            String?             @map("project_id")
+  currentStep          String              @default("welcome") @map("current_step")
+  completedSteps       String[]            @default([]) @map("completed_steps")
+  totalSteps           Int                 @default(5) @map("total_steps")
+  completionPercentage Decimal             @default(0.00) @map("completion_percentage") @db.Decimal(5, 2)
+  isCompleted          Boolean             @default(false) @map("is_completed")
+  startedAt            DateTime            @default(now()) @map("started_at") @db.Timestamptz(6)
+  completedAt          DateTime?           @map("completed_at") @db.Timestamptz(6)
+  lastActivityAt       DateTime            @default(now()) @map("last_activity_at") @db.Timestamptz(6)
+  stepData             Json                @default("{}") @map("step_data")
+  timeSpentSeconds     Int                 @default(0) @map("time_spent_seconds")
+  sessionCount         Int                 @default(1) @map("session_count")
+  abandonedAt          DateTime?           @map("abandoned_at") @db.Timestamptz(6)
+  createdAt            DateTime            @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt            DateTime            @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+  project              Project?            @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user                 User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  onboardingStepLogs   OnboardingStepLog[]
 
   @@unique([userId, projectId])
   @@map("onboarding_progress")
@@ -261,49 +257,47 @@ model Campaign {
 }
 
 model Subscriber {
-  id             String    @id @default(cuid())
-  projectId      String    @map("project_id")
-  campaignId     String?   @map("campaign_id")
-  email          String
-  firstName      String?   @map("first_name")
-  lastName       String?   @map("last_name")
-  phone          String?
-  status         String    @default("active")
-  tags           String[]  @default([])
-  customFields   Json      @default("{}") @map("custom_fields") @db.JsonB
-  source         String?
-  optedInAt      DateTime  @default(now()) @map("opted_in_at")
-  unsubscribedAt DateTime? @map("unsubscribed_at")
-  createdAt      DateTime  @default(now()) @map("created_at")
-  updatedAt      DateTime  @updatedAt @map("updated_at")
-
-  project         Project          @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  campaign        Campaign?        @relation(fields: [campaignId], references: [id], onDelete: SetNull)
+  id              String           @id @default(cuid())
+  projectId       String           @map("project_id")
+  campaignId      String?          @map("campaign_id")
+  email           String
+  firstName       String?          @map("first_name")
+  lastName        String?          @map("last_name")
+  phone           String?
+  status          String           @default("active")
+  tags            String[]         @default([])
+  customFields    Json             @default("{}") @map("custom_fields")
+  source          String?
+  optedInAt       DateTime         @default(now()) @map("opted_in_at") @db.Timestamptz(6)
+  unsubscribedAt  DateTime?        @map("unsubscribed_at") @db.Timestamptz(6)
+  createdAt       DateTime         @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt       DateTime         @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
   analyticsEvents AnalyticsEvent[]
+  campaign        Campaign?        @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  project         Project          @relation(fields: [projectId], references: [id], onDelete: Cascade)
 
   @@unique([projectId, email])
   @@map("subscribers")
 }
 
 model AutomationFlow {
-  id             String   @id @default(cuid())
-  projectId      String   @map("project_id")
-  userId         String   @map("user_id")
-  name           String
-  description    String?
-  triggerType    String   @map("trigger_type")
-  triggerConfig  Json     @default("{}") @map("trigger_config") @db.JsonB
-  actions        Json     @default("{}") @db.JsonB
-  conditions     Json     @default("{}") @db.JsonB
-  status         String   @default("draft")
-  totalTriggered Int      @default(0) @map("total_triggered")
-  totalCompleted Int      @default(0) @map("total_completed")
-  createdAt      DateTime @default(now()) @map("created_at")
-  updatedAt      DateTime @updatedAt @map("updated_at")
-
+  id              String           @id @default(cuid())
+  projectId       String           @map("project_id")
+  userId          String           @map("user_id")
+  name            String
+  description     String?
+  triggerType     String           @map("trigger_type")
+  triggerConfig   Json             @default("{}") @map("trigger_config")
+  actions         Json             @default("{}")
+  conditions      Json             @default("{}")
+  status          String           @default("draft")
+  totalTriggered  Int              @default(0) @map("total_triggered")
+  totalCompleted  Int              @default(0) @map("total_completed")
+  createdAt       DateTime         @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt       DateTime         @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+  analyticsEvents AnalyticsEvent[]
   project         Project          @relation(fields: [projectId], references: [id], onDelete: Cascade)
   user            User             @relation(fields: [userId], references: [id], onDelete: Cascade)
-  analyticsEvents AnalyticsEvent[]
 
   @@map("automation_flows")
 }
@@ -331,15 +325,15 @@ model AnalyticsEvent {
   id           String   @id @default(cuid())
   projectId    String   @map("project_id")
   userId       String?  @map("user_id")
+  eventType    String   @map("event_type")
+  eventName    String   @map("event_name")
+  eventData    Json     @default("{}") @map("event_data")
   subscriberId String?  @map("subscriber_id")
   campaignId   String?  @map("campaign_id")
   automationId String?  @map("automation_id")
-  eventType    String   @map("event_type")
-  eventName    String   @map("event_name")
-  eventData    Json     @default("{}") @map("event_data") @db.JsonB
   sessionId    String?  @map("session_id")
   userAgent    String?  @map("user_agent")
-  ipAddress    String?  @map("ip_address")
+  ipAddress    String?  @map("ip_address") @db.Inet
   referrer     String?
   utmSource    String?  @map("utm_source")
   utmMedium    String?  @map("utm_medium")
