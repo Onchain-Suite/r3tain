@@ -246,7 +246,7 @@ export async function getProjectById(projectId: string) {
     where: { id: projectId },
     include: {
       organization: true,
-      members: {
+      projectMembers: {
         where: { isActive: true },
         include: {
           user: {

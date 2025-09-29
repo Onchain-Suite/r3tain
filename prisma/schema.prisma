@@ -158,10 +158,10 @@ model Project {
   onboardingProgress OnboardingProgress[]
   analyticsEvents    AnalyticsEvent[]
   sessions           Session[]
-  Organization       Organization?        @relation(fields: [organizationId], references: [id])
-  ProjectMember      ProjectMember[]
-  Campaign           Campaign[]
-  Subscriber         Subscriber[]
+  organization       Organization?        @relation(fields: [organizationId], references: [id])
+  projectMembers     ProjectMember[]
+  campaigns          Campaign[]
+  subscribers        Subscriber[]
 
   @@unique([organizationId, slug])
   @@map("projects")
