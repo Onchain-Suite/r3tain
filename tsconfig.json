@@ -36,7 +36,7 @@
       "@/tag/*": ["./src/features/tag/*"],
       "@/components/*": ["./src/shared/components/*"],
       "@/hooks/*": ["./src/shared/hooks/*"],
-      "@/lib/*": ["./src/shared/lib/*"],
+      "@/lib/*": ["./src/lib/*"],
       "@/prisma/*": ["./prisma/generated/prisma/*"],
       "@/prismaEdge/*": ["./prisma/generated/prisma-edge/*"],
       "@/providers/*": ["./src/shared/providers/*"],

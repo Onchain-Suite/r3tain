@@ -10,10 +10,11 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import type { Filter, Segment } from "@/segment/types";
 
 import { CustomSegmentBuilder } from "./custom-segment-builder";
 import { SegmentCard } from "./segment-card";
+
+import type { Filter, Segment } from "@/segment/types";
 
 export interface SegmentBuilderProps {
   isOpen: boolean;

@@ -5,11 +5,6 @@ import { Mail, Tag, Users, X } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { PasswordField } from "@/auth/components/shared";
-import {
-  type SubscriberFormData,
-  subscriberSchema,
-} from "@/community/validations";
 import {
   CheckboxFormField,
   CityFormField,
@@ -30,6 +25,12 @@ import {
 } from "@/components/ui";
 
 import { TagsModal } from "./tag-modal";
+
+import { PasswordField } from "@/auth/components/shared";
+import {
+  type SubscriberFormData,
+  subscriberSchema,
+} from "@/community/validations";
 
 export function SubscriberForm() {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);

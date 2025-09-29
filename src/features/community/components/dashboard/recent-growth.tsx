@@ -2,9 +2,10 @@
 
 import { TrendingUp } from "lucide-react";
 
-import type { GrowthData } from "@/community/types";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+import type { GrowthData } from "@/community/types";
 
 interface RecentGrowthProps {
   growth: GrowthData;

@@ -1,8 +1,10 @@
 import { Suspense } from "react";
 
-import { CommunityDashboard } from "@/community/pages";
 import { DashboardLayoutContent } from "@/components/layout";
+
 import { dashboardRoutes } from "@/config/routes";
+
+import { CommunityDashboard } from "@/community/pages";
 import { AutomationPageSkeleton } from "@/features/automation/components";
 
 const crumbs = [

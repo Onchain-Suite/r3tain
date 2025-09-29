@@ -4,7 +4,6 @@ import { format } from "date-fns";
 import { Download, ExternalLink } from "lucide-react";
 import { useMemo } from "react";
 
-import { exportToCSV, generateDetailedMessageData } from "@/analytics/utils";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -16,6 +15,8 @@ import {
 
 import { columns } from "./columns";
 import { DataTable } from "./data-table";
+
+import { exportToCSV, generateDetailedMessageData } from "@/analytics/utils";
 
 interface DetailedMessagePerformanceProps {
   startDate: Date;

@@ -2,9 +2,10 @@
 
 import { Mail } from "lucide-react";
 
-import type { MessageInbox } from "@/community/types";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+import type { MessageInbox } from "@/community/types";
 
 interface MessagesInboxProps {
   inbox: MessageInbox;

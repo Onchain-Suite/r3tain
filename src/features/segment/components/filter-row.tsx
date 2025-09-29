@@ -18,10 +18,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { getFilterConfiguration, groupedFilterOptions } from "@/segment/data";
-import type { Filter } from "@/segment/types";
 
 import { FilterValueInput } from "./filter-value-input";
+
+import { getFilterConfiguration, groupedFilterOptions } from "@/segment/data";
+import type { Filter } from "@/segment/types";
 
 interface FilterRowProps {
   filter: Filter;

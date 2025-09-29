@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-import { useDateRange } from "@/analytics/hooks";
 import {
   CustomTabs,
   CustomTabsContent,
@@ -19,6 +18,8 @@ import { IndividualMessagePerformance } from "../components/message-performance/
 import { PerformanceMetrics } from "../components/performance/performance-metrics";
 import { PerformanceOverTime } from "../components/performance/performance-over-time";
 import { SampleDataAlert } from "../components/sample-data-alert";
+
+import { useDateRange } from "@/analytics/hooks";
 
 export function MarketingDashboard() {
   const [selectedMessages, setSelectedMessages] = useState<string[]>([]);

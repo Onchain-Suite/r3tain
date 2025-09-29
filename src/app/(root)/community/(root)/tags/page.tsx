@@ -1,7 +1,9 @@
 import { Suspense } from "react";
 
 import { DashboardLayoutContent } from "@/components/layout";
+
 import { dashboardRoutes } from "@/config/routes";
+
 import { AutomationPageSkeleton } from "@/features/automation/components";
 import { TagsPage } from "@/tag/page";
 

@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
     const userData = await request.json();
 
     // Sync user data with our database
-    await prisma.userProfile.upsert({
+    await prisma.user.upsert({
       where: { id: user.id },
       update: {
         name:
@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
           user.primaryEmail?.split("@")[0] ??
           "User",
         email: userData.email ?? user.primaryEmail ?? "",
-        profilePicture: userData.profilePicture ?? user.profileImageUrl,
+        image: userData.profilePicture ?? user.profileImageUrl,
         emailVerified:
           userData.emailVerified ?? user.primaryEmailVerified ?? false,
       },
@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
           user.primaryEmail?.split("@")[0] ??
           "User",
         email: userData.email ?? user.primaryEmail ?? "",
-        profilePicture: userData.profilePicture ?? user.profileImageUrl,
+        image: userData.profilePicture ?? user.profileImageUrl,
         emailVerified:
           userData.emailVerified ?? user.primaryEmailVerified ?? false,
         onboardingCompleted: false,

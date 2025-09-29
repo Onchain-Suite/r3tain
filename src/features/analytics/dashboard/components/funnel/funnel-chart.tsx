@@ -3,9 +3,10 @@
 import { TrendingDown } from "lucide-react";
 import { Bar, BarChart, Cell, XAxis, YAxis } from "recharts";
 
+import { ChartContainer, ChartTooltip } from "@/components/ui/chart";
+
 import { type CustomTooltipProps } from "@/analytics/dashboard/types";
 import { type Channel } from "@/analytics/types";
-import { ChartContainer, ChartTooltip } from "@/components/ui/chart";
 
 interface FunnelChartProps {
   data: {

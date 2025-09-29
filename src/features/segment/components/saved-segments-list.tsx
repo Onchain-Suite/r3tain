@@ -1,8 +1,8 @@
-import type { SavedSegment, SortOption, SortOrder } from "@/segment/types";
-
 import { PaginationControls } from "./pagination-controls";
 import { SegmentListItem } from "./segment-list-item";
 import { SortControls } from "./sort-controls";
+
+import type { SavedSegment, SortOption, SortOrder } from "@/segment/types";
 
 interface SavedSegmentsListProps {
   segments: SavedSegment[];

@@ -2,9 +2,10 @@
 
 import { Mail, Send } from "lucide-react";
 
-import type { EngagementData } from "@/community/types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+
+import type { EngagementData } from "@/community/types";
 
 interface EngagementSectionProps {
   engagement: EngagementData;

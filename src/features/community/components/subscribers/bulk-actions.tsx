@@ -8,7 +8,6 @@ import {
   Users,
 } from "lucide-react";
 
-import type { Subscriber } from "@/community/types";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -16,6 +15,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
+import type { Subscriber } from "@/community/types";
 
 interface BulkActionsProps {
   selectedSubscribers: Subscriber[];

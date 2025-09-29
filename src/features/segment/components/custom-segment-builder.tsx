@@ -10,12 +10,13 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "@/components/ui/drawer";
-import { useFilterManagement } from "@/segment/hooks";
-import { type Filter } from "@/segment/types";
 
 import { FilterOperatorButtons } from "./filter-operator-buttons";
 import { FilterRow } from "./filter-row";
 import { SegmentReview } from "./segment-review";
+
+import { useFilterManagement } from "@/segment/hooks";
+import { type Filter } from "@/segment/types";
 
 interface CustomSegmentBuilderProps {
   isOpen: boolean;

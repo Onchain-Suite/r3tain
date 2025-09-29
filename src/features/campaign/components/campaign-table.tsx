@@ -7,10 +7,12 @@ import {
   DefaultTableHeader,
 } from "@/components/data-table";
 import { Table } from "@/components/ui";
-import { mockCampaigns } from "@/data/campaign";
+
 import { useDataTable } from "@/hooks/client";
 
 import { columns } from "./column";
+
+import { mockCampaigns } from "@/data/campaign";
 
 export const CampaignTable = () => {
   const { id, table, inputRef } = useDataTable({

@@ -1,6 +1,5 @@
 "use client";
 
-import type { MessageMetric } from "@/analytics/utils";
 import {
   Select,
   SelectContent,
@@ -8,6 +7,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
+import type { MessageMetric } from "@/analytics/utils";
 
 const metrics: { value: MessageMetric; label: string }[] = [
   { value: "open-rate", label: "Open rate" },

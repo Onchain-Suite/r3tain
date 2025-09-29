@@ -4,8 +4,9 @@ import type { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { ArrowUpDown, Mail, Smartphone } from "lucide-react";
 
-import type { DetailedMessageData } from "@/analytics/utils";
 import { Button } from "@/components/ui/button";
+
+import type { DetailedMessageData } from "@/analytics/utils";
 
 export const columns: ColumnDef<DetailedMessageData>[] = [
   {

@@ -5,7 +5,7 @@ import { DashboardPageContent, LoadingSkeleton } from "@/dashboard/components";
 export default function Page() {
   return (
     <Suspense fallback={<LoadingSkeleton />}>
-      <DashboardPageContent />;
+      <DashboardPageContent />
     </Suspense>
   );
 }

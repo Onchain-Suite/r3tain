@@ -3,9 +3,10 @@
 import { ArrowRight, Mail } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import type { Segment } from "@/segment/types";
 
 import { SegmentCard } from "./segment-card";
+
+import type { Segment } from "@/segment/types";
 
 interface PrebuiltSegmentsSectionProps {
   segments: Segment[];

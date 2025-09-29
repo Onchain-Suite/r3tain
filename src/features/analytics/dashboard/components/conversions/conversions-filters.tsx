@@ -1,6 +1,5 @@
 "use client";
 
-import type { Channel, Period } from "@/analytics/types";
 import {
   Select,
   SelectContent,
@@ -10,6 +9,8 @@ import {
 } from "@/components/ui/select";
 
 import { TimePeriodTabs } from "../shared/time-period-tabs";
+
+import type { Channel, Period } from "@/analytics/types";
 
 interface ConversionsFiltersProps {
   selectedChannel: Channel;

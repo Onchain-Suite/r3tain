@@ -10,9 +10,10 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "@/components/ui/drawer";
-import type { Filter } from "@/segment/types";
 
 import { SaveSegmentModal } from "./save-segment-modal";
+
+import type { Filter } from "@/segment/types";
 
 interface Contact {
   id: string;

@@ -2,13 +2,13 @@
 
 import { useMemo, useState } from "react";
 
-import type { Channel } from "@/analytics/types";
-import { generateFunnelData } from "@/analytics/utils";
-
 import { FunnelChannelSelector } from "./funnel-channel-selector";
 import { FunnelChart } from "./funnel-chart";
 import { FunnelRevenueDisplay } from "./funnel-revenue-display";
 import { FunnelStepsDetails } from "./funnel-steps-details";
+
+import type { Channel } from "@/analytics/types";
+import { generateFunnelData } from "@/analytics/utils";
 
 export function ConversionFunnel() {
   const [selectedChannel, setSelectedChannel] = useState<Channel>("email");

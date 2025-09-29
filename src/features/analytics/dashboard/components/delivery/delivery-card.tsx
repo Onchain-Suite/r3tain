@@ -2,6 +2,21 @@
 
 import { useMemo, useState } from "react";
 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+import { useIsMobile } from "@/hooks/client";
+
+import { ChartPagination, MetricDropdown, TimePeriodTabs } from "../shared";
+import { DeliveryChart } from "./delivery-chart";
+import { DeliveryDetailsSidebar } from "./delivery-details-sidebar";
+import { DeliveryMetricDisplay } from "./delivery-metric-display";
+
 import { type Period } from "@/analytics/types";
 import {
   type DeliveryMetric,
@@ -11,19 +26,6 @@ import {
   getMetricLabel,
   getMetricValue,
 } from "@/analytics/utils";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { useIsMobile } from "@/hooks/client";
-
-import { ChartPagination, MetricDropdown, TimePeriodTabs } from "../shared";
-import { DeliveryChart } from "./delivery-chart";
-import { DeliveryDetailsSidebar } from "./delivery-details-sidebar";
-import { DeliveryMetricDisplay } from "./delivery-metric-display";
 
 const deliveryMetrics = [
   { value: "abuse-report-rate" as DeliveryMetric, label: "Abuse report rate" },

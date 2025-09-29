@@ -11,10 +11,12 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-import type { CommunityStats } from "@/community/types";
 import { ReusableDropdownMenu } from "@/components/common";
 import { Button } from "@/components/ui";
+
 import { dashboardRoutes } from "@/config/routes";
+
+import type { CommunityStats } from "@/community/types";
 
 interface CommunityHeaderProps {
   stats: CommunityStats;

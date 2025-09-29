@@ -2,18 +2,19 @@
 
 import { useMemo, useState } from "react";
 
-import type { Channel, Period } from "@/analytics/types";
-import {
-  generateDailyData,
-  generateMonthlyData,
-  generateWeeklyData,
-} from "@/analytics/utils";
 import { useIsMobile } from "@/hooks/client";
 
 import { ConversionsChart } from "./conversions-chart";
 import { ConversionsFilters } from "./conversions-filters";
 import { ConversionsRevenueBreakdown } from "./conversions-revenue-breakdown";
 import { ConversionsTotalRevenue } from "./conversions-total-revenue";
+
+import type { Channel, Period } from "@/analytics/types";
+import {
+  generateDailyData,
+  generateMonthlyData,
+  generateWeeklyData,
+} from "@/analytics/utils";
 
 export function ConversionsOverTime() {
   const [selectedChannel, setSelectedChannel] = useState<Channel>("all");

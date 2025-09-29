@@ -2,8 +2,9 @@
 
 import { motion } from "framer-motion";
 
-import type { Tag } from "@/community/types";
 import { Badge } from "@/components/ui/badge";
+
+import type { Tag } from "@/community/types";
 
 interface PopularTagsProps {
   popularTags: Tag[];

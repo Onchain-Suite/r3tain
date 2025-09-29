@@ -2,7 +2,9 @@ import { Suspense } from "react";
 
 import { DashboardLayoutContent } from "@/components/layout";
 import { WorkInProgressPage } from "@/components/meta-components";
+
 import { dashboardRoutes } from "@/config/routes";
+
 import { AutomationPageSkeleton } from "@/features/automation/components";
 
 const crumbs = [

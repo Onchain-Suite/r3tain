@@ -2,6 +2,8 @@
 
 import { useRouter } from "next/navigation";
 
+import { dashboardRoutes } from "@/config/routes";
+
 import {
   ActionCards,
   AdditionalResources,
@@ -9,7 +11,6 @@ import {
   HeroSection,
   PageTitle,
 } from "@/community/components/dashboard";
-import { dashboardRoutes } from "@/config/routes";
 
 export const NewUserDashboardPage = () => {
   const { push } = useRouter();

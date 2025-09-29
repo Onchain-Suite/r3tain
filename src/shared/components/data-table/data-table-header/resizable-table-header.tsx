@@ -18,6 +18,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui";
+
 import { cn, getPinningStyles } from "@/lib/utils";
 
 import type { DataTableHeaderProps, DataTableTitleHeaderProps } from "../types";

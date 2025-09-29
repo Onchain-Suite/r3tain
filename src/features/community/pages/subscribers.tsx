@@ -3,6 +3,10 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
+import { Button } from "@/components/ui";
+
+import { dashboardRoutes } from "@/config/routes";
+
 import {
   BulkActions,
   columns,
@@ -13,8 +17,6 @@ import {
 import { mockSubscribers } from "@/community/data";
 import type { Subscriber, SubscriberFilters } from "@/community/types";
 import { exportToCSV, exportToPDF } from "@/community/utils";
-import { Button } from "@/components/ui";
-import { dashboardRoutes } from "@/config/routes";
 
 export function SubscribersPage() {
   const router = useRouter();

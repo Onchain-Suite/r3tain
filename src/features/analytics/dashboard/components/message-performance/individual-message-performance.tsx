@@ -3,20 +3,22 @@
 import { useMemo, useState } from "react";
 
 import {
-  generateMessagePerformanceData,
-  type MessageMetric,
-} from "@/analytics/utils";
-import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+
 import { useIsMobile } from "@/hooks/client";
 
 import { MessagePerformanceChart } from "./message-performance-chart";
 import { MessagePerformanceMetricSelector } from "./message-performance-metric-selector";
+
+import {
+  generateMessagePerformanceData,
+  type MessageMetric,
+} from "@/analytics/utils";
 
 interface IndividualMessagePerformanceProps {
   startDate: Date;

@@ -5,6 +5,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
+
 import { authRoutes } from "@/config/routes";
 
 export function CTASection() {

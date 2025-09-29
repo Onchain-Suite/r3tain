@@ -102,13 +102,44 @@ const eslintConfig = [
       next: {
         rootDir: ".", // Adjust if your Next.js app is in a subdirectory
       },
+      // Configure simple-import-sort
+      "simple-import-sort": {
+        groups: [
+          // React and Next.js imports
+          ["^react", "^next", "^@next"],
+          // External packages
+          ["^[a-zA-Z]"],
+          // Internal absolute imports
+          ["^@/"],
+          // Internal relative imports
+          ["^[./]"],
+          // Type imports
+          ["^.*\\u0000$"],
+        ],
+      },
     },
     rules: {
       // Prettier integration
       "prettier/prettier": "error",
 
       // Import sorting and organization
-      "simple-import-sort/imports": "error",
+      "simple-import-sort/imports": [
+        "error",
+        {
+          groups: [
+            // External packages (ascending order) including types - @ packages come first
+            ["^@[a-zA-Z]", "^[a-zA-Z]"],
+            // Internal (react-components in ascending order)
+            ["^@/components"],
+            // Internal (config, constants, hooks, lib/, server-actions, utils/, validation)
+            ["^@/config", "^@/constants", "^@/hooks", "^@/lib", "^@/server", "^@/utils", "^@/validation"],
+            // Internal (types)
+            ["^@/types"],
+            // Internal relative imports
+            ["^[./]"],
+          ],
+        },
+      ],
       "simple-import-sort/exports": "error",
       "import/first": "error",
       "import/newline-after-import": "error",

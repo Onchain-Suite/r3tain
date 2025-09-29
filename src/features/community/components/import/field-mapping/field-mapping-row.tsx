@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { ArrowRight, Info } from "lucide-react";
 import { useState } from "react";
 
-import type { FieldMapping, R3tainField } from "@/community/types";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -14,6 +13,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
+import type { FieldMapping, R3tainField } from "@/community/types";
 
 interface FieldMappingRowProps {
   mapping: FieldMapping;

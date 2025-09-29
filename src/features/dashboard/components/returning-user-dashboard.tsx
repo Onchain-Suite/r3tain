@@ -1,6 +1,7 @@
 "use client";
 
 import { DashboardLayoutContent } from "@/components/layout";
+
 import { dashboardRoutes } from "@/config/routes";
 import { useUserSync } from "@/hooks/client";
 

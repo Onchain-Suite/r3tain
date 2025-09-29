@@ -2,6 +2,7 @@ import { flexRender } from "@tanstack/react-table";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 import { TableHead, TableHeader, TableRow } from "@/components/ui";
+
 import { cn } from "@/lib/utils";
 
 import type { DataTableHeaderProps } from "../types";

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Loader2 } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
 
 import { Button } from "@/components/ui/button";
@@ -41,14 +42,25 @@ export function OAuthButtons({
         >
           <Button
             variant="outline"
-            className={`h-12 w-full ${provider.bg} group transition-all duration-200`}
+            className={`h-12 w-full ${provider.bg} group transition-all duration-200 ${
+              isLoading ? "opacity-50 cursor-not-allowed" : ""
+            }`}
             onClick={() => onOAuthSignIn(provider.name)}
             disabled={isLoading}
           >
-            <provider.icon
-              className={`mr-3 h-5 w-5 ${provider.color} transition-transform group-hover:scale-110`}
-            />
-            Continue with {provider.name}
+            {isLoading ? (
+              <>
+                <Loader2 className="mr-3 h-5 w-5 animate-spin text-gray-500" />
+                Signing in...
+              </>
+            ) : (
+              <>
+                <provider.icon
+                  className={`mr-3 h-5 w-5 ${provider.color} transition-transform group-hover:scale-110`}
+                />
+                Continue with {provider.name}
+              </>
+            )}
           </Button>
         </motion.div>
       ))}

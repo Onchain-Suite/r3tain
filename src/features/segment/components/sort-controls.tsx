@@ -11,6 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
 import type { SortOption, SortOrder } from "@/segment/types";
 
 interface SortControlsProps {

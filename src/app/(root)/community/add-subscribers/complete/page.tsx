@@ -3,6 +3,9 @@
 import { AlertTriangle } from "lucide-react";
 import { useEffect, useState } from "react";
 
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+
 import {
   ActionButtons,
   SummarySection,
@@ -12,8 +15,6 @@ import { PageHeader } from "@/community/components/shared";
 import { useImport } from "@/community/context";
 import { useImportNavigation } from "@/community/hooks";
 import { ImportService } from "@/community/services";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Button } from "@/components/ui/button";
 
 export default function CompletePage() {
   const { state } = useImport();

@@ -1,10 +1,6 @@
 import { useState } from "react";
 
-import { TagInputSection } from "@/community/components/import/tag/tag-input-section";
-import { mockAvailableTags, mockPopularTags } from "@/community/data";
-import { type Tag } from "@/community/types";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { useBulkTagForm } from "@/tag/hooks";
 
 import {
   ActionSelector,
@@ -17,6 +13,11 @@ import {
   SubmitMethodSelector,
 } from "./bulk-tag-comps";
 import { EmailValidation } from "./email-validation";
+
+import { TagInputSection } from "@/community/components/import/tag/tag-input-section";
+import { mockAvailableTags, mockPopularTags } from "@/community/data";
+import { type Tag } from "@/community/types";
+import { useBulkTagForm } from "@/tag/hooks";
 
 interface BulkTagModalProps {
   open: boolean;

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 
 import { ThemeModeToggle } from "@/components/common";
 import { Button } from "@/components/ui/button";
+
 import { authRoutes } from "@/config/routes";
 
 const navigation = [

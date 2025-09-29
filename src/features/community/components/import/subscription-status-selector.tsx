@@ -3,10 +3,6 @@
 import { motion } from "framer-motion";
 import { AlertCircle, Check, Trash2, UserX } from "lucide-react";
 
-import {
-  SUBSCRIPTION_STATUSES,
-  type SubscriptionStatus,
-} from "@/community/types";
 import { Badge } from "@/components/ui/badge";
 import {
   Select,
@@ -15,6 +11,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
+import {
+  SUBSCRIPTION_STATUSES,
+  type SubscriptionStatus,
+} from "@/community/types";
 
 interface SubscriptionStatusSelectorProps {
   selectedStatus: SubscriptionStatus;

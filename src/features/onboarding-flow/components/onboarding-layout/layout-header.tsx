@@ -3,7 +3,6 @@
 import { ChevronDown, Globe, User } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-import { type SignUpFormData } from "@/auth/validation";
 import { Logo } from "@/components/common";
 import { Avatar, AvatarFallback } from "@/components/ui";
 import { Button } from "@/components/ui/button";
@@ -13,9 +12,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
 import { publicRoutes } from "@/config/routes";
 import { useLocalStorage } from "@/hooks/client";
 import { getInitials } from "@/lib/utils";
+
+import { type SignUpFormData } from "@/auth/validation";
 
 export function LayoutHeader() {
   const { value: user } = useLocalStorage<SignUpFormData | null>("user", null);

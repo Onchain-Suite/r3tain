@@ -1,6 +1,8 @@
-import { AddSubscriber } from "@/community/pages";
 import { DashboardLayoutContent } from "@/components/layout";
+
 import { dashboardRoutes } from "@/config/routes";
+
+import { AddSubscriber } from "@/community/pages";
 
 const crumbs = [
   { label: "Home", href: dashboardRoutes.home },

@@ -3,6 +3,7 @@
 import { Info } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+
 import type { Segment } from "@/segment/types";
 
 interface SegmentCardProps {
